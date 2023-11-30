@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Задание 7</h3>
+    <input type="number" id="numberInput">
+    <br><br>
+    <button onclick="calculateDigitSum()">ответ</button>
+    <p id="res7"></p>
+
+
+    <br><br><br>
+    <h3>Задание 8</h3>
+    <div id="res8"></div>
+
+
+
+
+    <br><br><br>
+    <h3>Задание 9</h3>
+    <input type="number" id="num9">
+    <br><br>
+    <button onclick="isEven()">ответ</button>
+    <p id="res9"></p>
+
+
+
+
+
+    <br><br><br>
+    <h3>Задание 10</h3>
+    <p id="output"></p>
+
+
+
+
+    <br><br><br>
+    <h3>Задание 11</h3>
+    <input type="number" id="num11">
+    <button onclick="showDivisors()">Показать делители</button>
+    <p id="res11"></p>
+
+
+
+
+    <br><br><br>
+    <h3>Задание 12</h3>
+    <p id="res12"></p>
+
+
+
+
+
+
+    <br><br><br>
+    <h3>Задание 13</h3>
+    <p id="res13"></p>
+
+
+
+
+
+
+
+    <br><br><br>
+    <h3>Задание 14</h3>
+    <label for="str14">Введите слово</label>
+    <input type="text" id="str14">
+    <br><br>
+    <label for="str15">Для поиска данного слова</label>
+    <input type="text" id="str15">
+    <br><br>
+    <button onclick="inArray()">Поиск</button>
+    <p id="res14"></p>
+
+
+
+
+
+
+
+
+    <br><br><br>
+    <h3>Задание 15</h3>
+    <p id="res15"></p>
+<script>
+    //задание 7
+    function calculateDigitSum() {
+    let numberInput = document.getElementById("numberInput").value;
+    let number = parseInt(numberInput);
+    let sum = getDigitSum(number);
+    let result = document.getElementById("res7");
+    result.textContent = "Сумма цифр: " + sum;
+}
+
+function getDigitSum(number) {
+    let digitSum = 0;
+    let numberStr = String(number);
+    for (let i = 0; i < numberStr.length; i++) {
+        digitSum += parseInt(numberStr.charAt(i));
+    }
+    return digitSum;
+}
+
+
+
+
+    //задание 8
+    let years = [];
+
+for (let year = 1; year <= 2019; year++) {
+  let sum = 0;
+  let digits = year.toString().split('');
+
+  for (let i = 0; i < digits.length; i++) {
+    sum += parseInt(digits[i]);
+  }
+
+  if (sum === 13) {
+    years.push(year);
+  }
+}
+function displayYearsOnPage(years) {
+  let resultContainer = document.getElementById('res8');
+
+  if (years.length === 0) {
+    resultContainer.innerHTML = 'Нет годов с суммой цифр равной 13.';
+  } else {
+    let yearsList = document.createElement('ul');
+
+    years.forEach(function(year) {
+      let listItem = document.createElement('li');
+      listItem.textContent = year;
+      yearsList.appendChild(listItem);
+    });
+
+    resultContainer.innerHTML = '';
+    resultContainer.appendChild(yearsList);
+  }
+}
+displayYearsOnPage(years);
+
+
+
+
+//задание 9 стрелочная функция
+const isEven = () => {
+  let numberInput = document.getElementById("num9").value;
+  let number = parseInt(numberInput.value);
+  let resultContainer = document.getElementById("res9");
+  if(number%2===0){
+    resultContainer.textContent = 'true';
+  }
+  else{
+    resultContainer.textContent = 'false';
+  }
+};
+
+
+
+
+
+//задание 10
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const evenNumbers = (function() {
+            return numbers.filter(function(number) {
+                return number % 2 === 0;
+            });
+        })();
+        const outputElement = document.getElementById('output');
+        outputElement.textContent = evenNumbers.join(', ');
+
+
+
+
+
+        //заданние 11
+        const getDivisors = () => {
+            const numberInput = document.getElementById('num11').value;
+            const number = parseInt(numberInput);
+
+            if (!isNaN(number) && number > 0) {
+                const divisors = [];
+                for (let i = 1; i <= number; i++) {
+                    if (number % i === 0) {
+                        divisors.push(i);
+                    }
+                }
+                return divisors;
+            } else {
+                return [];
+            }
+        };
+
+        const showDivisors = () => {
+            const divisors = getDivisors();
+            const outputElement = document.getElementById('res11');
+            outputElement.textContent = divisors.join(', ');
+        };
+
+
+
+
+
+
+        //задание 12
+        
+        function ucfirst(string){
+            let word=string.split(' ');
+            for(let i=0; i<word.length; i++){
+                word[i]=word[i][0].toUpperCase()+word[i].slice(1);
+            }
+            return word.join(' ');
+        }
+        let str='hello js';
+        let newStr=ucfirst(str);
+        document.querySelector('#res12').innerHTML=newStr;
+
+
+
+
+
+
+        //задание 13
+        let words='var_text_hello';
+        function up(str){
+            let char=str.replace(/_/g, ' ');
+            let chars=char.split(' ');
+            for(let i=0; i<chars.length; i++){
+                chars[i]=chars[i][0].toUpperCase()+chars[i].slice(1);
+            }
+            return chars.join(' ');
+        }
+        let newWords=up(words);
+        document.querySelector('#res13').innerHTML=newWords;
+
+
+
+
+
+
+
+
+
+
+
+
+        //задание 14
+        let inArray=(elem, mas)=>{
+            let str14=document.querySelector('#str14').value;
+            let str15=document.querySelector('#str15').value;
+            if(str15===str14){
+                document.querySelector('#res14').innerHTML='true';
+            }
+            else{
+                document.querySelector('#res14').innerHTML='false';
+            }
+        }
+        
+        
+
+
+
+        //задание 15
+        let newWord='123456';
+        function Returns(stringss){
+            let rearrangedStr = "";
+
+            for (let i = 0; i < stringss.length; i += 2) {
+             rearrangedStr += stringss[i + 1] + stringss[i];
+            }
+            return rearrangedStr;
+        }
+        let newArr=Returns(newWord);
+        document.querySelector('#res15').textContent=newArr;
+    </script>
+</body>
+</html>
